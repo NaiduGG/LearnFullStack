@@ -50,6 +50,7 @@ section {
 
   border: 1px solid #e5e7eb;
   border-radius: 12px;
+  corner-shape: squircle;
 
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
 }
@@ -180,4 +181,3 @@ Responsive Layout
     padding: 30px;
   }
 }
-
