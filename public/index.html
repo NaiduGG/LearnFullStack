@@ -9,9 +9,9 @@
         font-family: Arial, sans-serif;
         font-size: 14px;
       }
-      div {
+      .div {
         display: flex;
-        justify-content: center;
+        justify-content: space-around;
         align-items: center;
         padding: 10px;
         margin-top: 20px;
@@ -27,19 +27,54 @@
         padding: 7px 16px;
         border-radius: 5px;
       }
+
+      .add-periods {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        margin-top: 20px;
+      }
     </style>
   </head>
   <body>
     <div class="div">
       <a href="testing.html">Next</a>
+      <a href="sign-in.html">log out</a>
     </div>
-    <div class="add-periods">
-      <label>
-        <input type="checkbox" id="teacher-name"> Naidu
+    <form action="/add-teacher" method="POST" class="add-periods">
+      <label
+        >Name:
+        <input
+          type="text"
+          id="teacher-name"
+          name="name"
+          placeholder="H. Appalanaidu"
+          required
+        />
+      </label>
+      <label
+        >Department:
+        <input
+          type="text"
+          id="teacher-department"
+          name="department"
+          placeholder="DTSC"
+          required
+        />
+      </label>
+      <label
+        >Nickname:
+        <input
+          type="text"
+          id="teacher-nickname"
+          name="nickname"
+          placeholder="HAN"
+          required
+        />
 
-    </label>
-        
-    </div>
+        <button type="submit">Enter</button>
+      </label>
+    </form>
   </body>
   <script src="makeTable.js"></script>
 </html>

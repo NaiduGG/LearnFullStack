@@ -133,7 +133,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static("public"));
 
-const db = new sqlite.Database("users.db", (error) => {
+const db = new sqlite.Database("timetable.db", (error) => {
   //2
   if (error) {
     console.log("unable to connect");
@@ -168,7 +168,30 @@ app.post("/signin", (request, response) => {
       response.redirect("/index.html");
     } else {
       response.send("GTFO");
+      return error;
     }
+  });
+});
+
+app.post("/add-teacher", (request, response) => {
+  const name = request.body.name;
+  const department = request.body.department;
+  const nickname = request.body.nickname;
+
+  console.log("Name entered:", name);
+  console.log("Department entered:", department);
+  console.log("Nickname entered:", nickname);
+
+  const sql =
+    "INSERT INTO teachers (name, department, nickname) VALUES (?,?,?)";
+
+  db.run(sql, [name, department, nickname], (error, user) => {
+    if (error) {
+      console.log(error);
+      response.send("Unable to add teacher");
+      return;
+    }
+    response.status(200).send("Teacher added successfully");
   });
 });
 
@@ -193,6 +216,20 @@ app.post("/signup", (request, response) => {
 
     console.log(`User created successfully with ID: ${this.lastID}`);
     response.send("Account created successfully! You can now log in.");
+  });
+});
+
+app.get("/api/teachers", (request, response) => {
+  const sql = "SELECT nickname FROM teachers";
+
+  db.all(sql, (error, teachers) => {
+    if (error) {
+      console.log(error);
+      response.status(500).send("Error fetching teachers");
+      return;
+    }
+    console.log("Fetched teachers:", teachers);
+    response.json(teachers);
   });
 });
 

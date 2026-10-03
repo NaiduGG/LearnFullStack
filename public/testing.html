@@ -60,6 +60,12 @@
         margin-top: 20px;
         border-collapse: collapse;
       }
+      h3 {
+        color: black;
+      }
+      #sidebar-roaster {
+        color: black;
+      }
     </style>
   </head>
   <body>
@@ -70,47 +76,104 @@
     </div>
     <div class="content">
       <aside class="sidebar">
-        <button draggable="true" class="sidebar-button">Naidu</button>
-        <button draggable="true" class="sidebar-button">Mani</button>
-        <button draggable="true" class="sidebar-button">Babu</button>
+        <h3>Faculty List</h3>
+        <div action="/teachers" method="GET" id="sidebar-roaster">
+          loading faculty...
+        </div>
       </aside>
       <div>
         <table id="my-table">
           <tr>
-            <td draggable="true" class="table-cell">Emil</td>
-            <td draggable="true" class="table-cell">Tobias</td>
-            <td draggable="true" class="table-cell">Linus</td>
-            <td draggable="true" class="table-cell">John</td>
+            <td class="table-cell">Day</td>
+            <td class="table-cell">9:00 to 9:45</td>
+            <td class="table-cell" ">9:45 to 10:30</td>
+            <td class="table-cell" rowspan="7">break</td>
+            <td class="table-cell">10:45 to 11:30</td>
+            <td class="table-cell">11:30 to 12:15</td>
+            <td class="table-cell"rowspan="7">break</td>
+            <td class="table-cell">1:00 to 1:45</td>
+            <td class="table-cell">1:45 to 2:30</td>
+            <td class="table-cell"rowspan="7">break</td>
+            <td class="table-cell">2:45 to 3:30</td>
+            <td class="table-cell">3:30 to 4:15</td>
           </tr>
           <tr>
-            <td draggable="true" class="table-cell">16</td>
-            <td draggable="true" class="table-cell">14</td>
-            <td draggable="true" class="table-cell">10</td>
-            <td draggable="true" class="table-cell">15</td>
+            <td  class="table-cell">Monday</td>
+            <td draggable="true" class="table-cell timetable-slot"></td>
+            <td draggable="true" class="table-cell timetable-slot"></td>
+            <td draggable="true" class="table-cell timetable-slot"></td>
+            <td draggable="true" class="table-cell timetable-slot"></td>
+            <td draggable="true" class="table-cell timetable-slot"></td>
+            <td draggable="true" class="table-cell timetable-slot"></td>
+            <td draggable="true" class="table-cell timetable-slot"></td>
+            <td draggable="true" class="table-cell timetable-slot"></td>
+
           </tr>
+            <tr>
+                <td class="table-cell">Tuesday</td>
+                <td draggable="true" class="table-cell timetable-slot"></td>
+                <td draggable="true" class="table-cell timetable-slot"></td>
+                <td draggable="true" class="table-cell timetable-slot"></td>
+                <td draggable="true" class="table-cell timetable-slot"></td>
+                <td draggable="true" class="table-cell timetable-slot"></td>
+                <td draggable="true" class="table-cell timetable-slot"></td>
+                <td draggable="true" class="table-cell timetable-slot"></td>
+                <td draggable="true" class="table-cell timetable-slot"></td>
+            </tr>
+             <tr>
+                <td  class="table-cell">Wednesday</td>
+                <td draggable="true" class="table-cell timetable-slot"></td>
+                <td draggable="true" class="table-cell timetable-slot"></td>
+                <td draggable="true" class="table-cell timetable-slot"></td>
+                <td draggable="true" class="table-cell timetable-slot"></td>
+                <td draggable="true" class="table-cell timetable-slot"></td>
+                <td draggable="true" class="table-cell timetable-slot"></td>
+                <td draggable="true" class="table-cell timetable-slot"></td>
+                <td draggable="true" class="table-cell timetable-slot"></td>
+            </tr>
+             <tr>
+                <td class="table-cell">Thursday</td>
+                <td draggable="true" class="table-cell timetable-slot"></td>
+                <td draggable="true" class="table-cell timetable-slot"></td>
+                <td draggable="true" class="table-cell timetable-slot"></td>
+                <td draggable="true" class="table-cell timetable-slot"></td>
+                <td draggable="true" class="table-cell timetable-slot"></td>
+                <td draggable="true" class="table-cell timetable-slot"></td>
+                <td draggable="true" class="table-cell timetable-slot"></td>
+                <td draggable="true" class="table-cell timetable-slot"></td>
+            </tr>
+                <tr>
+                    <td  class="table-cell">Friday</td>
+                    <td draggable="true" class="table-cell timetable-slot"></td>
+                    <td draggable="true" class="table-cell timetable-slot"></td>
+                    <td draggable="true" class="table-cell timetable-slot"></td>
+                    <td draggable="true" class="table-cell timetable-slot"></td>
+                    <td draggable="true" class="table-cell timetable-slot"></td>
+                    <td draggable="true" class="table-cell timetable-slot"></td>
+                    <td draggable="true" class="table-cell timetable-slot"></td>
+                    <td draggable="true" class="table-cell timetable-slot"></td>
+                </tr>
+                 <tr>
+                <td class="table-cell">Saturday</td>
+                <td draggable="true" class="table-cell timetable-slot"></td>
+                <td draggable="true" class="table-cell timetable-slot"></td>
+                <td draggable="true" class="table-cell timetable-slot"></td>
+                <td draggable="true" class="table-cell timetable-slot"></td>
+                <td draggable="true" class="table-cell timetable-slot"></td>
+                <td draggable="true" class="table-cell timetable-slot"></td>
+                <td draggable="true" class="table-cell timetable-slot"></td>
+                <td draggable="true" class="table-cell timetable-slot"></td>
+            </tr>
         </table>
 
-        <table>
-          <tr>
-            <td draggable="true" class="table-cell">Emil</td>
-            <td draggable="true" class="table-cell">Tobias</td>
-            <td draggable="true" class="table-cell">Linus</td>
-            <td draggable="true" class="table-cell">John</td>
-          </tr>
-          <tr>
-            <td draggable="true" class="table-cell">16</td>
-            <td draggable="true" class="table-cell">14</td>
-            <td draggable="true" class="table-cell">10</td>
-            <td draggable="true" class="table-cell">15</td>
-          </tr>
-        </table>
+        
       </div>
     </div>
   </body>
   <script src="makeTable.js"></script>
   <script>
     const sidebarButtons = document.querySelectorAll(".sidebar-button");
-    const tableCells = document.querySelectorAll(".table-cell");
+    const tableCells = document.querySelectorAll(".timetable-slot");
 
     // 2. Automatically assign unique IDs to the sidebar buttons
     sidebarButtons.forEach((button, index) => {
@@ -206,27 +269,107 @@
       });
     });
 
-    downloadCSV = () => {
-      const table = document.getElementById("my-table");
-      if (!table) return;
+    function downloadCSV() {
+    const table = document.getElementById("my-table");
+    let csvRows = [];
 
-      const rows = Array.from(table.rows);
-      const csvContent = rows
-        .map((row) => {
-          const cells = Array.from(row.cells);
-          return cells
-            .map((cell) => `"${cell.textContent.replace(/"/g, '""')}"`)
-            .join(",");
+    // Loop through every physical row layout line
+    for (let i = 0; i < table.rows.length; i++) {
+        const row = table.rows[i];
+        let rowData = [];
+
+        // --- ROW 1: THE HEADERS AND INITIAL STRUCTURE ---
+        if (i === 0) {
+            for (let j = 0; j < row.cells.length; j++) {
+                rowData.push('"' + row.cells[j].textContent.trim() + '"');
+            }
+        } 
+        // --- ROWS 2-7: THE DYNAMIC WEEKDAY CONTENT SLOTS ---
+        else {
+            const cells = row.cells;
+            
+            rowData.push('"' + cells[0].textContent.trim() + '"'); // Day Name (e.g., Monday)
+            rowData.push('"' + cells[1].textContent.trim() + '"'); // Period 1
+            rowData.push('"' + cells[2].textContent.trim() + '"'); // Period 2
+            
+            // FIX 1: Manually inject the first break column data value placeholder
+            rowData.push('"break"'); 
+            
+            rowData.push('"' + cells[3].textContent.trim() + '"'); // Period 3
+            rowData.push('"' + cells[4].textContent.trim() + '"'); // Period 4
+            
+            // FIX 2: Manually inject the second break column data value placeholder
+            rowData.push('"break"'); 
+            
+            rowData.push('"' + cells[5].textContent.trim() + '"'); // Period 5
+            rowData.push('"' + cells[6].textContent.trim() + '"'); // Period 6
+            
+            // FIX 3: Manually inject the third break column data value placeholder
+            rowData.push('"break"'); 
+            
+            rowData.push('"' + cells[7].textContent.trim() + '"'); // Period 7
+            rowData.push('"' + cells[8].textContent.trim() + '"'); // Period 8
+        }
+
+        // Merge row columns together with standard commas
+        csvRows.push(rowData.join(","));
+    }
+
+    // Join all rows vertically with line breaks
+    const csvContent = csvRows.join("\n");
+
+    // Package with Excel-friendly UTF-8 Byte Order Mark to ensure proper character rendering
+    const blob = new Blob([new Uint8Array([0xEF, 0xBB, 0xBF]), csvContent], { 
+        type: "text/csv;charset=utf-8;" 
+    });
+    
+    // Trigger download pipeline
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "timetable_matrix.csv";
+    a.click();
+    URL.revokeObjectURL(url);
+}
+
+
+    window.onload = function () {
+      // Ask the Express server for the teacher data list array
+      fetch("/api/teachers")
+        .then((response) => response.json())
+        .then((data) => {
+          const sidebarRoster = document.getElementById("sidebar-roaster");
+          sidebarRoster.innerHTML = ""; // Clear out the "Loading..." text
+
+          if (data.length === 0) {
+            sidebarRoster.innerHTML =
+              "<p style='color:#bdc3c7; font-style:italic;'>No teachers in database.</p>";
+            return;
+          }
+
+          data.forEach((teacher, index) => {
+            const button = document.createElement("button");
+
+            // 1. Display the teacher name from your SQLite row schema
+            button.textContent = teacher.nickname;
+
+            // 2. MATCH INDEPENDENT STYLE: Uses your exact existing CSS class configuration!
+            button.className = "sidebar-button";
+            button.draggable = true;
+
+            // 3. Assign unique system tracking IDs to keep drag interactions stable
+            button.id = "roster-btn-" + index;
+
+            // 4. Attach your exact existing drag behavior
+            button.addEventListener("dragstart", (event) => {
+              activeDraggedId = button.id;
+              event.dataTransfer.setData("text/plain", button.id);
+            });
+
+            sidebarRoster.appendChild(button);
+          });
         })
-        .join("\n");
-
-      const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "table_data.csv";
-      a.click();
-      URL.revokeObjectURL(url);
+        .catch((error) => console.error("Error fetching teacher data:", error));
     };
   </script>
 </html>
