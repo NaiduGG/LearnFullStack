@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+      }
+      a {
+        text-decoration: none;
+        color: rgb(255, 255, 255);
+        background-color: rgb(69, 69, 200);
+        padding: 7px 16px;
+        border-radius: 5px;
+      }
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+      }
+      button.export {
+        background-color: rgb(69, 69, 200);
+        color: white;
+        height: 30px;
+        width: 100px;
+        border: none;
+        border-radius: 10px;
+        corner-shape: squircle;
+      }
+      .content {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+      }
+      .sidebar {
+        width: 100px;
+        height: 100%;
+        color: white;
+        padding: 10px;
+      }
+      .sidebar button {
+        width: 100%;
+        height: 30px;
+        margin-bottom: 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: rgb(69, 69, 200);
+        color: white;
+      }
+      .table-cell {
+        border: 1px solid black;
+        border-collapse: collapse;
+        padding: 10px;
+      }
+      table {
+        margin-top: 20px;
+        border-collapse: collapse;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div>name</div>
+      <a href="index.html">Make Table</a>
+      <button class="export" onclick="downloadCSV()">Export</button>
+    </div>
+    <div class="content">
+      <aside class="sidebar">
+        <button draggable="true" class="sidebar-button">Naidu</button>
+        <button draggable="true" class="sidebar-button">Mani</button>
+        <button draggable="true" class="sidebar-button">Babu</button>
+      </aside>
+      <div>
+        <table id="my-table">
+          <tr>
+            <td draggable="true" class="table-cell">Emil</td>
+            <td draggable="true" class="table-cell">Tobias</td>
+            <td draggable="true" class="table-cell">Linus</td>
+            <td draggable="true" class="table-cell">John</td>
+          </tr>
+          <tr>
+            <td draggable="true" class="table-cell">16</td>
+            <td draggable="true" class="table-cell">14</td>
+            <td draggable="true" class="table-cell">10</td>
+            <td draggable="true" class="table-cell">15</td>
+          </tr>
+        </table>
+
+        <table>
+          <tr>
+            <td draggable="true" class="table-cell">Emil</td>
+            <td draggable="true" class="table-cell">Tobias</td>
+            <td draggable="true" class="table-cell">Linus</td>
+            <td draggable="true" class="table-cell">John</td>
+          </tr>
+          <tr>
+            <td draggable="true" class="table-cell">16</td>
+            <td draggable="true" class="table-cell">14</td>
+            <td draggable="true" class="table-cell">10</td>
+            <td draggable="true" class="table-cell">15</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </body>
+  <script src="makeTable.js"></script>
+  <script>
+    const sidebarButtons = document.querySelectorAll(".sidebar-button");
+    const tableCells = document.querySelectorAll(".table-cell");
+
+    // 2. Automatically assign unique IDs to the sidebar buttons
+    sidebarButtons.forEach((button, index) => {
+      button.id = "sidebar-btn-" + index; // e.g., sidebar-btn-0, sidebar-btn-1
+    });
+
+    // 3. Automatically assign unique IDs to the table cells
+    tableCells.forEach((cell, index) => {
+      cell.id = "table-cell-" + index; // e.g., table-cell-0, table-cell-1
+    });
+
+    let activeDraggedId = "";
+
+    let committedValues = {};
+
+    // Fill the database with the initial table layout text ("Emil", "Tobias", "16", etc.)
+    tableCells.forEach((cell) => {
+      committedValues[cell.id] = cell.textContent;
+    });
+
+    tableCells.forEach((cell) => {
+      cell.addEventListener("dragleave", () => {
+        cell.style.backgroundColor = ""; // Reset the background to normal
+
+        // Safely restore the original text from our master database shield
+        cell.textContent = committedValues[cell.id];
+      });
+    });
+
+    sidebarButtons.forEach((button) => {
+      button.addEventListener("dragstart", (event) => {
+        activeDraggedId = button.id; // Store its ID in our global memory box
+        event.dataTransfer.setData("text/plain", button.id); // Package it for the browser engine
+      });
+    });
+
+    // Loop through every table cell and listen for a drag action (moving text out of it)
+    tableCells.forEach((cell) => {
+      cell.addEventListener("dragstart", (event) => {
+        activeDraggedId = cell.id; // Store its ID in our global memory box
+        event.dataTransfer.setData("text/plain", cell.id);
+        event.dataTransfer.effectAllowed = "move"; // Signal that we are moving data, not copying
+      });
+    });
+
+    tableCells.forEach((cell) => {
+      cell.addEventListener("dragover", (event) => {
+        event.preventDefault(); // REQUIRED: Tells the browser "Allow drops here!"
+
+        // Change the background color to pale blue instantly
+        cell.style.backgroundColor = "#e0e0ff";
+
+        // Find out what element is currently being dragged using our memory box
+        const draggedElement = document.getElementById(activeDraggedId);
+
+        if (draggedElement) {
+          // Show the preview text inside the cell in real-time
+          cell.textContent = draggedElement.textContent;
+        }
+      });
+    });
+
+    tableCells.forEach((cell) => {
+      cell.addEventListener("dragend", (event) => {
+        // If it was dropped in an invalid area (outside the table), dropEffect will be "none"
+        if (event.dataTransfer.dropEffect === "none") {
+          cell.textContent = ""; // Clear the text inside the cell
+        }
+      });
+    });
+
+    tableCells.forEach((cell) => {
+      cell.addEventListener("drop", (event) => {
+        event.preventDefault(); // Stop standard browser anomalies
+        cell.style.backgroundColor = ""; // Remove the blue preview background
+
+        const draggedId = event.dataTransfer.getData("text/plain");
+        const draggedElement = document.getElementById(draggedId);
+
+        if (draggedElement) {
+          // Update our master database with the new text value
+          committedValues[cell.id] = draggedElement.textContent;
+        } else {
+          // If the element dragged was another cell that was just cleared out, copy its value
+          const fallbackCell = document.getElementById(activeDraggedId);
+          committedValues[cell.id] = fallbackCell
+            ? fallbackCell.textContent
+            : "";
+        }
+
+        // Hard-lock the text into the cell display
+        cell.textContent = committedValues[cell.id];
+      });
+    });
+
+    downloadCSV = () => {
+      const table = document.getElementById("my-table");
+      if (!table) return;
+
+      const rows = Array.from(table.rows);
+      const csvContent = rows
+        .map((row) => {
+          const cells = Array.from(row.cells);
+          return cells
+            .map((cell) => `"${cell.textContent.replace(/"/g, '""')}"`)
+            .join(",");
+        })
+        .join("\n");
+
+      const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "table_data.csv";
+      a.click();
+      URL.revokeObjectURL(url);
+    };
+  </script>
+</html>

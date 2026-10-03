@@ -1,12 +1,45 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
-    <h1>hello</h1>
-    <h2>hello</h2>
-</body>
+    <style>
+      * {
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+      }
+      div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        margin-top: 20px;
+      }
+
+      a {
+        text-decoration: none;
+        display: inline-block; /* 👈 Added this to make width work */
+        width: 50px;
+        text-align: center; /* 👈 Optional: Centers the text inside the button */
+        color: rgb(255, 255, 255);
+        background-color: rgb(69, 69, 200);
+        padding: 7px 16px;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="div">
+      <a href="testing.html">Next</a>
+    </div>
+    <div class="add-periods">
+      <label>
+        <input type="checkbox" id="teacher-name"> Naidu
+
+    </label>
+        
+    </div>
+  </body>
+  <script src="makeTable.js"></script>
 </html>
