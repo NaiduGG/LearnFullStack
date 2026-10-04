@@ -133,7 +133,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static("public"));
 
-const db = new sqlite.Database("timetable.db", (error) => {
+const db = new sqlite.Database("database/timetable.db", (error) => {
   //2
   if (error) {
     console.log("unable to connect");
