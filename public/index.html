@@ -28,11 +28,17 @@
         border-radius: 5px;
       }
 
+      h2 {
+        padding-left: 20px;
+      }
+
       .add-periods {
         display: flex;
         flex-direction: row;
         justify-content: space-around;
         margin-top: 20px;
+        padding-bottom: 40px;
+        border-bottom: 1px solid black;
       }
     </style>
   </head>
@@ -41,6 +47,7 @@
       <a href="testing.html">Next</a>
       <a href="sign-in.html">log out</a>
     </div>
+    <h2>Add Teacher</h2>
     <form action="/add-teacher" method="POST" class="add-periods">
       <label
         >Name:
@@ -75,6 +82,35 @@
         <button type="submit">Enter</button>
       </label>
     </form>
+    <form action="add-subject" method="POST" class="add-subject">
+      <h2>Add Subject</h2>
+      <label
+        >Name:
+        <input
+          type="text"
+          id="subject-name"
+          name="name"
+          placeholder="Maths"
+          required
+          
+        />
+      </label>
+      <label
+        >semester:
+        <select name="semester" id="semester">
+        <option value="I">1</option>
+        <option value="II">2</option>
+        <option value="III">3</option>
+        <option value="IV">4</option>
+        <option value="V">5</option>
+        <option value="VI">6</option>
+      </select>
+      </label>
+      <button type="submit">Enter</button>
+    </form>
+    
+    
+  
   </body>
   <script src="makeTable.js"></script>
 </html>

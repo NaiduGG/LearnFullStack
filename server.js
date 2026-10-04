@@ -143,6 +143,43 @@ const db = new sqlite.Database("timetable.db", (error) => {
   console.log("connected successfully!");
 });
 
+app.post("/signup", (request, response) => {
+  const name = request.body.name;
+  const email = request.body.email;
+  const password = request.body.password;
+  const confirmPassword = request.body.confirmPassword;
+
+  console.log("Email entered:", email);
+  console.log("Password entered:", password);
+
+  if (password !== confirmPassword) {
+    return response.send(`
+      <script>
+        alert("Error: Passwords do not match!");
+        window.location.href = "/signup.html";
+      </script>
+    `);
+  }
+
+  const sql = "INSERT INTO users (name, email, password) VALUES (?,?,?)";
+
+  db.run(sql, [name, email, password], (error) => {
+    if (error) {
+      console.log("Database error:", error);
+
+      if (error.message.includes("UNIQUE constraint failed")) {
+        return response.status(400).send("Email already registered!");
+      }
+
+      return response.status(500).send("Database error");
+    }
+
+    console.log(`User created successfully with ID: ${this.lastID}`);
+
+    return response.redirect("/sign-in.html");
+  });
+});
+
 app.post("/signin", (request, response) => {
   const email = request.body.email;
   const password = request.body.password;
@@ -160,11 +197,11 @@ app.post("/signin", (request, response) => {
 
     if (!user) {
       console.log("User not found");
-      return;
+      return response.status(401).send("Invalid email or password.");
     }
     console.log(user);
-    console.log("actual password: ", user.password_hash);
-    if (password == user.password_hash) {
+    console.log("actual password: ", user.password);
+    if (password == user.password) {
       response.redirect("/index.html");
     } else {
       response.send("GTFO");
@@ -192,30 +229,6 @@ app.post("/add-teacher", (request, response) => {
       return;
     }
     response.status(200).send("Teacher added successfully");
-  });
-});
-
-app.post("/signup", (request, response) => {
-  const name = request.body.name;
-  const email = request.body.email;
-  const password = request.body.password;
-
-  console.log("Email entered:", email);
-  console.log("Password entered:", password);
-
-  const sql = "INSERT INTO users (name, email, password_hash) VALUES (?,?,?)";
-
-  db.run(sql, [name, email, password], (error, user) => {
-    if (error) {
-      console.log(error);
-    }
-
-    if (error.message.includes("UNIQUE constraint failed")) {
-      return response.status(400).send("Email already registered!");
-    }
-
-    console.log(`User created successfully with ID: ${this.lastID}`);
-    response.send("Account created successfully! You can now log in.");
   });
 });
 
