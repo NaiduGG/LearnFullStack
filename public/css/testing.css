@@ -1,0 +1,81 @@
+* {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+a {
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+  background-color: rgb(69, 69, 200);
+  padding: 7px 16px;
+  border-radius: 5px;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+button.export {
+  background-color: rgb(69, 69, 200);
+  color: white;
+  height: 30px;
+  width: 100px;
+  border: none;
+  border-radius: 10px;
+  corner-shape: squircle;
+}
+.content {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+.sidebar {
+  width: 100px;
+  height: 100%;
+  color: white;
+  padding: 10px;
+}
+.sidebar button {
+  width: 100%;
+  height: 30px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: rgb(69, 69, 200);
+  color: white;
+}
+.table-cell {
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 10px;
+  text-align: center;
+}
+.table-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+table {
+  margin-top: 20px;
+  border-collapse: collapse;
+}
+
+.table-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+}
+h3 {
+  color: black;
+}
+#sidebar-roaster {
+  color: black;
+}
+#break {
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  text-align: center;
+}
