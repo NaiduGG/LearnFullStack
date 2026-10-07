@@ -127,13 +127,18 @@ const express = require("express");
 
 const sqlite = require("sqlite3").verbose(); //1
 
+const path = require("path");
+
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static("public"));
 
-const db = new sqlite.Database("database/timetable.db", (error) => {
+// 2. FIX: Create an absolute path relative to server.js
+const dbPath = path.join(__dirname, "database", "timetable.db");
+
+const db = new sqlite.Database(dbPath, (error) => {
   //2
   if (error) {
     console.log("unable to connect");
@@ -231,6 +236,31 @@ app.post("/add-teacher", (request, response) => {
     response.status(200).send("Teacher added successfully");
   });
 });
+
+app.post("/add-class", (request, response) => {});
+
+app.post("/add-subject", (request, response) => {
+  const name = request.body.subject_name;
+  const semester = request.body.semester;
+
+  console.log(`Adding Subject: ${name}, Semester: ${semester}`);
+
+  const sql = "INSERT INTO subjects (subject_name, semester) VALUES (?,?)";
+
+  db.run(sql, [name, semester], function (error) {
+    if (error) {
+      console.log(error.message);
+      response.status(500).send("Unable to add subject");
+      return;
+    }
+
+    response.status(200).send("subject added successfully");
+  });
+});
+
+app.post("/assign-teacher", (request, response) => {});
+
+app.delete("/delete-class", (request, response) => {});
 
 app.get("/api/teachers", (request, response) => {
   const sql = "SELECT nickname FROM teachers";
