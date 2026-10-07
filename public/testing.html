@@ -9,22 +9,29 @@
   <body>
     <div class="header">
       <div>name</div>
-      <a href="index.html">Make Table</a>
+      
       <button class="export" onclick="downloadCSV()">Export</button>
     </div>
     <div class="content">
+
+      <div class="content">
+        <a class="index-ref" href="index.html">Make Table</a>
+        
+   
+
+
+      <div class="table-wrapper">
+        <div class="table-container" id="table-container-1"></div>
+        <div class="table-container" id="table-container-2"></div>
+      </div>
+
       <aside class="sidebar">
         <h3>Faculty List</h3>
         <div action="/teachers" method="GET" id="sidebar-roaster">
           loading faculty...
         </div>
       </aside>
-      <div class="table-wrapper">
-        <div class="table-container" id="table-container-1"></div>
-        <div class="table-container" id="table-container-2"></div>
-      </div>
     </div>
   </body>
   <script src="testing.js"></script>
-
 </html>

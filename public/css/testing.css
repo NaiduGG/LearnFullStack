@@ -29,6 +29,9 @@ button.export {
   flex-direction: row;
   gap: 20px;
 }
+.index-ref {
+  height: fit-content;
+}
 .sidebar {
   width: 100px;
   height: 100%;
