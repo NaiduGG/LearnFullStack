@@ -154,7 +154,7 @@ router.post("/clear-classes", (request, response) => {
   });
 });
 
-// 7. Fetch the saved grid for a specific teacher (ADDED c.id as class_id so we can delete slots)
+// 7. Fetch the saved grid for a specific teacher
 router.get("/faculty-grid/:teacherId", (request, response) => {
   const sql = `
         SELECT 
@@ -170,7 +170,7 @@ router.get("/faculty-grid/:teacherId", (request, response) => {
   });
 });
 
-// 8. Fetch valid Class + Subject combos for selected teachers (NEW)
+// 8. Fetch valid Class + Subject combos for selected teachers (Sidebar Menu)
 router.post("/class-options", (request, response) => {
   const { teacherIds } = request.body;
   if (!teacherIds || teacherIds.length === 0) return response.json([]);
@@ -178,7 +178,6 @@ router.post("/class-options", (request, response) => {
   const safeIds = teacherIds.map((id) => parseInt(id, 10));
   const placeholders = safeIds.map(() => "?").join(",");
 
-  // Finds all classes that require a subject this teacher is qualified for
   const sql = `
         SELECT DISTINCT c.id as class_id, c.name, c.group_name, c.section, c.year, s.subject_name
         FROM teacher_subjects ts

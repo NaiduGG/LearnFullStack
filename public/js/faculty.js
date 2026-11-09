@@ -51,6 +51,37 @@ function condenseClassName(year, className, groupName, section) {
   return `${year} ${className} ${cleanGroup} ${section.toUpperCase()}`;
 }
 
+async function loadTeacherSchedule(teacherId) {
+  const res = await fetch(`/api/schedule/faculty-grid/${teacherId}`);
+  if (!res.ok) throw new Error("Route 7 is failing!");
+
+  const schedule = await res.json();
+  const table = document.querySelector(`table[data-teacher-id="${teacherId}"]`);
+  let workloadCount = 0;
+
+  if (table) {
+    schedule.forEach((slot) => {
+      const cell = table.querySelector(
+        `.timetable-slot[data-day-index="${slot.day_index}"][data-slot-index="${slot.slot_index}"]`,
+      );
+      if (cell) {
+        const condensedName = formatClassName(
+          slot.year,
+          slot.class_name,
+          slot.group_name,
+          slot.section,
+        );
+        cell.innerHTML = `<strong>${condensedName}</strong><br><span style="font-size:11px; color:#555;">${slot.subject_name}</span>`;
+        cell.classList.add("filled");
+        cell.dataset.classId = slot.class_id;
+        workloadCount++;
+      }
+    });
+    const tag = document.getElementById(`workload-${teacherId}`);
+    if (tag) tag.textContent = `${workloadCount} periods/week`;
+  }
+}
+
 async function loadTeachersToDropdown() {
   const res = await fetch("/api/teachers");
   const teachers = await res.json();
@@ -92,13 +123,28 @@ async function updateWorkspace() {
     return;
   }
 
+  // Safely build all tables first
   for (const teacher of selectedTeachers) {
     buildGridForTeacher(teacher, container);
-    await loadTeacherSchedule(teacher.id);
   }
 
-  // Populate sidebar with classes these teachers are ELIGIBLE to teach
-  loadValidClasses(selectedTeachers.map((t) => t.id));
+  // Then safely load the data into them
+  for (const teacher of selectedTeachers) {
+    try {
+      await loadTeacherSchedule(teacher.id);
+    } catch (err) {
+      console.error(`Error loading schedule for teacher ${teacher.id}:`, err);
+    }
+  }
+
+  // Finally, safely load the sidebar
+  try {
+    await loadValidClasses(selectedTeachers.map((t) => t.id));
+  } catch (err) {
+    console.error("Error loading sidebar classes:", err);
+    document.getElementById("sidebar-roster").innerHTML =
+      "<span style='color:red;'>Error loading classes. Server route missing?</span>";
+  }
 }
 
 function buildGridForTeacher(teacher, container) {
@@ -146,14 +192,17 @@ async function loadValidClasses(teacherIds) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ teacherIds }),
   });
-  const combos = await res.json();
 
+  if (!res.ok)
+    throw new Error("Sidebar Route 8 is missing or broken in backend!");
+
+  const combos = await res.json();
   const roster = document.getElementById("sidebar-roster");
   roster.innerHTML = "";
 
   if (combos.length === 0) {
     roster.innerHTML =
-      "<span style='font-size:12px; color:red;'>No eligible classes found.</span>";
+      "<span style='font-size:12px; color:#888;'>No eligible classes found for these teachers.</span>";
     return;
   }
 
@@ -161,13 +210,14 @@ async function loadValidClasses(teacherIds) {
     const btn = document.createElement("button");
     btn.className = "sidebar-button";
 
-    const condensedName = condenseClassName(
+    // Ensure combo.name is passed here!
+    const condensedName = formatClassName(
       combo.year,
       combo.name,
       combo.group_name,
       combo.section,
     );
-    btn.innerHTML = `${condensedName}<br><span style="font-weight:normal;">${combo.subject_name}</span>`;
+    btn.innerHTML = `<strong>${condensedName}</strong><br><span style="font-weight:normal;">${combo.subject_name}</span>`;
 
     btn.addEventListener("click", () => {
       document
