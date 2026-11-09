@@ -14,13 +14,18 @@ app.use(express.static("public"));
 // 2. Import your modular routes
 const teacherRoutes = require("./routes/teachers");
 const subjectRoutes = require("./routes/subjects");
-
+const classRoutes = require("./routes/classes");
+const assignRoutes = require("./routes/assign");
 // 3. Delegate traffic to the routes
 // Any request starting with /api/teachers goes to the teachers.js file
 app.use("/api/teachers", teacherRoutes);
 
 // Any request starting with /api/subjects goes to the subjects.js file
 app.use("/api/subjects", subjectRoutes);
+
+app.use("/api/classes", classRoutes);
+
+app.use("/api/schedule", assignRoutes);
 
 // 4. Start the Server
 app

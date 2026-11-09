@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Faculty Timetable</title>
+    <link rel="stylesheet" href="../css/assign.css" />
+    <style>
+      /* Styling for the Workload Tag */
+      .workload-tag {
+        font-size: 13px;
+        background-color: #e8f4fd;
+        color: #4b3dce;
+        padding: 4px 10px;
+        border-radius: 12px;
+        margin-left: 10px;
+        font-weight: bold;
+        vertical-align: middle;
+        border: 1px solid #c8e1f8;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="nav-left">
+        <div style="position: relative">
+          <button class="hamburger-btn" onclick="toggleNavMenu()">☰</button>
+          <div id="nav-menu" class="nav-dropdown">
+            <a href="classes.html">1. Manage Classes</a>
+            <a href="subjects.html">2. Manage Subjects</a>
+            <a href="teachers.html">3. Manage Teachers</a>
+            <a href="assign.html">4. Manage Schedule</a>
+            <a href="faculty.html" class="active">5. View Faculty Timetable</a>
+          </div>
+        </div>
+        <h2>Faculty Timetable</h2>
+      </div>
+
+      <div class="nav-center">
+        <!-- Custom Multi-Select for Teachers -->
+        <div class="multi-select-container">
+          <button class="multi-select-btn" onclick="toggleTeacherDropdown()">
+            Select Faculty ▼
+          </button>
+          <div class="multi-select-dropdown" id="teacher-checkboxes">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-right">
+        <button class="export-btn" onclick="downloadFacultyCSV()">
+          Export CSV
+        </button>
+      </div>
+    </div>
+
+    <!-- Main Workspace Layout -->
+    <div class="content">
+      <!-- Left Side: Dynamically Stacked Timetable Grids -->
+      <div class="main-tables" id="grids-container">
+        <div class="empty-state">
+          Please select one or more faculty members to view their timetables.
+        </div>
+      </div>
+
+      <!-- Right Side: Assigned Classes Sidebar -->
+      <aside class="sidebar">
+        <h3>Assigned Classes</h3>
+        <p
+          style="
+            font-size: 11px;
+            color: #888;
+            margin-top: -15px;
+            margin-bottom: 15px;
+          "
+        >
+          (Classes these faculty teach)
+        </p>
+        <div id="sidebar-roster">
+          <!-- Unique classes will populate here -->
+        </div>
+      </aside>
+    </div>
+
+    <script src="../js/faculty.js"></script>
+  </body>
+</html>

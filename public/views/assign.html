@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Assign Workload</title>
+    <link rel="stylesheet" href="../css/assign.css" />
+  </head>
+  <body>
+    <!-- Top Navigation Header -->
+    <div class="header">
+      <div class="nav-left">
+        <div style="position: relative">
+          <button class="hamburger-btn" onclick="toggleNavMenu()">☰</button>
+          <div id="nav-menu" class="nav-dropdown">
+            <a href="classes.html">1. Manage Classes</a>
+            <a href="subjects.html">2. Manage Subjects</a>
+            <a href="teachers.html">3. Manage Teachers</a>
+            <a href="assign.html" class="active">4. Manage Schedule</a>
+            <a href="faculty.html">5. View Faculty Timetable</a>
+          </div>
+        </div>
+        <h2>Assign Schedule</h2>
+      </div>
+
+      <div class="nav-center">
+        <!-- Custom Multi-Select for Classes -->
+        <div class="multi-select-container">
+          <button class="multi-select-btn" onclick="toggleClassDropdown()">
+            Select Classes ▼
+          </button>
+          <div class="multi-select-dropdown" id="class-checkboxes">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-right">
+        <!-- New Clear All Button -->
+        <button class="clear-btn" onclick="clearSelectedClasses()">
+          Clear All
+        </button>
+
+        <button class="export-btn" onclick="downloadCSV()">Export CSV</button>
+      </div>
+    </div>
+
+    <!-- Main Workspace Layout -->
+    <div class="content">
+      <!-- Left Side: Dynamically Stacked Timetable Grids -->
+      <div class="main-tables" id="grids-container">
+        <div class="empty-state">
+          Please select one or more classes to begin.
+        </div>
+      </div>
+
+      <!-- Right Side: Smart Faculty Sidebar -->
+      <aside class="sidebar">
+        <h3>Faculty List</h3>
+        <p
+          style="
+            font-size: 11px;
+            color: #888;
+            margin-top: -15px;
+            margin-bottom: 15px;
+          "
+        >
+          (Teacher + Subject)
+        </p>
+        <div id="sidebar-roaster">
+          <!-- Faculty buttons populated here based on selected classes -->
+        </div>
+      </aside>
+    </div>
+
+    <script src="../js/assign.js"></script>
+  </body>
+</html>

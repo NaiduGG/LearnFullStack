@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manage Teachers</title>
+    <link rel="stylesheet" href="../css/teachers.css" />
+  </head>
+  <body>
+    <div class="app-container">
+      <nav class="sidebar">
+        <h2>Timetable Admin</h2>
+        <ul class="sidebar-menu">
+          <li><a href="classes.html">1. Manage Classes</a></li>
+          <li><a href="subjects.html">2. Manage Subjects</a></li>
+          <li><a href="teachers.html" class="active">3. Manage Teachers</a></li>
+          <li><a href="assign.html">4. Manage Schedule</a></li>
+          <li><a href="faculty.html">5. View Faculty Timetable</a></li>
+        </ul>
+      </nav>
+
+      <main class="main-content">
+        <div class="header">
+          <h1>Manage Teachers</h1>
+        </div>
+
+        <!-- Step 1: Create & Manage Teachers -->
+        <div class="section-box">
+          <h3>Step 1: Create & Manage Faculty</h3>
+          <form
+            id="teacher-form"
+            style="
+              display: flex;
+              gap: 20px;
+              align-items: flex-end;
+              flex-wrap: wrap;
+            "
+          >
+            <div style="display: flex; flex-direction: column; gap: 5px">
+              <label>Full Name</label>
+              <input
+                type="text"
+                id="name"
+                placeholder="Prof. Jane Doe"
+                required
+                style="padding: 8px"
+              />
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 5px">
+              <label>Department</label>
+              <input
+                type="text"
+                id="department"
+                placeholder="Computer Science"
+                required
+                style="padding: 8px"
+              />
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 5px">
+              <label>Nickname (Initials)</label>
+              <input
+                type="text"
+                id="nickname"
+                placeholder="JD"
+                required
+                style="padding: 8px; width: 100px"
+              />
+            </div>
+            <button type="submit" class="btn-submit" id="form-submit-btn">
+              Add Teacher
+            </button>
+            <button
+              type="button"
+              class="btn-submit"
+              id="cancel-edit-btn"
+              style="display: none; background-color: #7f8c8d"
+            >
+              Cancel Edit
+            </button>
+          </form>
+
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Department</th>
+                <th>Nickname</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="teacher-table-body">
+              <!-- Populated by JS -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Step 2: Assign Qualifications -->
+        <div class="section-box">
+          <h3>Step 2: Assign Subject Qualifications</h3>
+          <p style="font-size: 0.9rem; color: #555">
+            Select a teacher to specify which subjects they are qualified to
+            teach.
+          </p>
+          <div style="margin-bottom: 20px">
+            <label style="font-weight: bold; margin-right: 10px"
+              >Select Teacher:</label
+            >
+            <select id="teacher-select" style="padding: 8px; min-width: 250px">
+              <option value="">-- Choose a Teacher --</option>
+              <!-- Populated by JS -->
+            </select>
+          </div>
+
+          <form id="assign-form" style="display: none">
+            <div class="checkbox-grid" id="subjects-container">
+              <!-- Checkboxes populated by JS -->
+            </div>
+            <button
+              type="submit"
+              class="btn-submit"
+              style="margin-top: 20px; background-color: #27ae60"
+            >
+              Save Qualifications
+            </button>
+          </form>
+        </div>
+      </main>
+    </div>
+
+    <script src="../js/teachers.js"></script>
+  </body>
+</html>

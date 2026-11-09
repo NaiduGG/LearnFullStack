@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manage Subjects</title>
+    <link rel="stylesheet" href="../css/subjects.css" />
+  </head>
+  <body>
+    <div class="app-container">
+      <nav class="sidebar">
+        <h2>Timetable Admin</h2>
+        <ul class="sidebar-menu">
+          <li><a href="classes.html">1. Manage Classes</a></li>
+          <li><a href="subjects.html" class="active">2. Manage Subjects</a></li>
+          <li><a href="teachers.html">3. Manage Teachers</a></li>
+          <li><a href="assign.html">4. Manage Schedule</a></li>
+          <li><a href="faculty.html">5. View Faculty Timetable</a></li>
+        </ul>
+      </nav>
+
+      <main class="main-content">
+        <div class="header">
+          <h1>Manage Subjects</h1>
+        </div>
+
+        <!-- Step 1: Create & Manage Subjects -->
+        <div class="section-box">
+          <h3>Step 1: Create & Manage Subjects</h3>
+          <form
+            id="subject-form"
+            style="display: flex; gap: 20px; align-items: flex-end"
+          >
+            <div style="display: flex; flex-direction: column; gap: 5px">
+              <label>Subject Name</label>
+              <input
+                type="text"
+                id="subject_name"
+                placeholder="e.g. Data Structures"
+                required
+                style="padding: 8px"
+              />
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 5px">
+              <label>Semester</label>
+              <select id="semester" required style="padding: 8px">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+              </select>
+            </div>
+            <button type="submit" class="btn-submit">Add Subject</button>
+            <!-- New Toggle Button -->
+            <button
+              type="button"
+              id="toggle-list-btn"
+              class="btn-submit"
+              style="background-color: #905c02"
+            >
+              Show Existing Subjects
+            </button>
+          </form>
+
+          <!-- Hidden Table for Subject List -->
+          <div
+            id="subject-list-container"
+            style="display: none; margin-top: 20px"
+          >
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Subject Name</th>
+                  <th>Semester</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="subject-table-body">
+                <!-- Populated by JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Step 2: Assign to Classes -->
+        <div class="section-box">
+          <h3>Step 2: Assign Subjects to a Class</h3>
+          <div style="margin-bottom: 20px">
+            <label style="font-weight: bold; margin-right: 10px"
+              >Select Class:</label
+            >
+            <select id="class-select" style="padding: 8px; min-width: 250px">
+              <option value="">-- Choose a Class --</option>
+              <!-- Populated by JS -->
+            </select>
+          </div>
+
+          <form id="assign-form" style="display: none">
+            <div class="checkbox-grid" id="subjects-container">
+              <!-- Checkboxes populated by JS -->
+            </div>
+            <button
+              type="submit"
+              class="btn-submit"
+              style="margin-top: 20px; background-color: #27ae60"
+            >
+              Save Assignments
+            </button>
+          </form>
+        </div>
+      </main>
+    </div>
+
+    <script src="../js/subjects.js"></script>
+  </body>
+</html>

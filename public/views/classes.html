@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manage Classes</title>
+    <link rel="stylesheet" href="../css/classes.css" />
+  </head>
+  <body>
+    <div class="app-container">
+      <!-- Persistent Sidebar Navigation -->
+      <nav class="sidebar">
+        <h2>Timetable Admin</h2>
+        <ul class="sidebar-menu">
+          <!-- We apply the 'active' class to the page we are currently on -->
+          <li><a href="classes.html" class="active">1. Manage Classes</a></li>
+          <li><a href="subjects.html">2. Manage Subjects</a></li>
+          <li><a href="teachers.html">3. Manage Teachers</a></li>
+          <li><a href="assign.html">4. Manage Schedule</a></li>
+          <li><a href="faculty.html">5. View Faculty Timetable</a></li>
+        </ul>
+      </nav>
+
+      <!-- Main Content Area -->
+      <main class="main-content">
+        <div class="header">
+          <h1>Manage Classes</h1>
+        </div>
+
+        <!-- Add/Edit Form -->
+        <div class="form-container">
+          <form id="class-form">
+            <div class="input-group">
+              <label>Year</label>
+              <select id="year" required>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+            </div>
+            <div class="input-group">
+              <label>Name (e.g. BSc)</label>
+              <input type="text" id="name" placeholder="B.Tech" required />
+            </div>
+            <div class="input-group">
+              <label>Group (e.g. DS)</label>
+              <input type="text" id="group_name" placeholder="DS" required />
+            </div>
+            <div class="input-group">
+              <label>Section</label>
+              <input type="text" id="section" placeholder="A" required />
+            </div>
+            <button type="submit" class="btn-submit">Add Class</button>
+          </form>
+        </div>
+
+        <!-- Sort and Filter Controls -->
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            background: #f1f1f1;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+          "
+        >
+          <div>
+            <label style="font-weight: bold; margin-right: 10px"
+              >Filter by Year:</label
+            >
+            <select
+              id="filter-year"
+              style="padding: 6px; border-radius: 4px; border: 1px solid #ccc"
+            >
+              <option value="all">All Years</option>
+              <option value="1">Year 1</option>
+              <option value="2">Year 2</option>
+              <option value="3">Year 3</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-weight: bold; margin-right: 10px"
+              >Sort By:</label
+            >
+            <select
+              id="sort-by"
+              style="padding: 6px; border-radius: 4px; border: 1px solid #ccc"
+            >
+              <option value="default">Default</option>
+              <option value="name-asc">Name (A-Z)</option>
+              <option value="name-desc">Name (Z-A)</option>
+              <option value="group-asc">Group (A-Z)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Data Table -->
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Year</th>
+              <th>Name</th>
+              <th>Group</th>
+              <th>Section</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="class-table-body">
+            <!-- Data populated by classes.js -->
+          </tbody>
+        </table>
+      </main>
+    </div>
+
+    <script src="../js/classes.js"></script>
+  </body>
+</html>
