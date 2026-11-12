@@ -16,6 +16,11 @@ const teacherRoutes = require("./routes/teachers");
 const subjectRoutes = require("./routes/subjects");
 const classRoutes = require("./routes/classes");
 const assignRoutes = require("./routes/assign");
+const allocateRoutes = require("./routes/allocate");
+
+
+
+app.use("/api/allocate", allocateRoutes);
 // 3. Delegate traffic to the routes
 // Any request starting with /api/teachers goes to the teachers.js file
 app.use("/api/teachers", teacherRoutes);

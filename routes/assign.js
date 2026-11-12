@@ -171,6 +171,7 @@ router.get("/faculty-grid/:teacherId", (request, response) => {
 });
 
 // 8. Fetch valid Class + Subject combos for selected teachers (Sidebar Menu)
+// 8. Fetch valid Class options based on STRICT Allocations
 router.post("/class-options", (request, response) => {
   const { teacherIds } = request.body;
   if (!teacherIds || teacherIds.length === 0) return response.json([]);
@@ -178,13 +179,13 @@ router.post("/class-options", (request, response) => {
   const safeIds = teacherIds.map((id) => parseInt(id, 10));
   const placeholders = safeIds.map(() => "?").join(",");
 
+  // Only show classes this teacher was explicitly allocated to in Step 4
   const sql = `
-        SELECT DISTINCT c.id as class_id, c.name, c.group_name, c.section, c.year, s.subject_name
-        FROM teacher_subjects ts
-        JOIN subjects s ON ts.subject_id = s.id
-        JOIN class_subjects cs ON s.id = cs.subject_id
-        JOIN classes c ON cs.class_id = c.id
-        WHERE ts.teacher_id IN (${placeholders})
+        SELECT c.id as class_id, c.name, c.group_name, c.section, c.year, s.subject_name
+        FROM allocations a
+        JOIN classes c ON a.class_id = c.id
+        JOIN subjects s ON a.subject_id = s.id
+        WHERE a.teacher_id IN (${placeholders})
         ORDER BY c.year, c.name, s.subject_name
     `;
 

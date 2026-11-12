@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // --- Safely format text ---
 function formatClassName(year, className, groupName, section) {
   const safeSec = section ? section.toUpperCase() : "";
-  return `${year} - ${className} - ${groupName} - ${safeSec}`;
+  return `${year} ${className} ${groupName} ${safeSec}`;
 }
 
 function toggleNavMenu() {
@@ -49,6 +49,43 @@ function condenseClassName(year, className, groupName, section) {
     .trim()
     .toUpperCase();
   return `${year} ${className} ${cleanGroup} ${section.toUpperCase()}`;
+}
+
+async function handleCellRightClick(e, cell, teacherId) {
+  e.preventDefault();
+
+  const classId = cell.dataset.classId || cell.getAttribute("data-class-id");
+  if (!classId) return;
+
+  const dayIndex = cell.dataset.dayIndex || cell.getAttribute("data-day-index");
+  const slotIndex =
+    cell.dataset.slotIndex || cell.getAttribute("data-slot-index");
+
+  try {
+    const res = await fetch("/api/schedule/clear", {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        class_id: classId,
+        day_index: dayIndex,
+        slot_index: slotIndex,
+      }),
+    });
+
+    // If the server successfully deleted it
+    if (res.ok) {
+      cell.innerHTML = "";
+      cell.classList.remove("filled");
+      cell.removeAttribute("data-class-id");
+      delete cell.dataset.classId;
+      updateWorkloadCount(teacherId, -1);
+    } else {
+      console.error("Server rejected deletion. Status:", res.status);
+    }
+  } catch (err) {
+    // Silently log network/parsing errors instead of throwing a popup alert
+    console.error("Silent background network warning:", err.message);
+  }
 }
 
 async function loadTeacherSchedule(teacherId) {

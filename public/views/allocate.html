@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Course Allocation</title>
+    <link rel="stylesheet" href="../css/assign.css" />
+    <link rel="stylesheet" href="../css/allocate.css" />
+  </head>
+  <body>
+    <div class="header">
+      <div class="nav-left">
+        <div style="position: relative">
+          <button class="hamburger-btn" onclick="toggleNavMenu()">☰</button>
+          <div id="nav-menu" class="nav-dropdown">
+            <a href="classes.html">1. Manage Classes</a>
+            <a href="subjects.html">2. Manage Subjects</a>
+            <a href="teachers.html">3. Manage Teachers</a>
+            <a href="allocate.html" class="active">4. Allocate Faculty</a>
+            <a href="assign.html">5. Assign Workload</a>
+            <a href="faculty.html">6. View Faculty Timetable</a>
+          </div>
+        </div>
+        <h2>Course Allocation</h2>
+      </div>
+
+      <div class="nav-center">
+        <select
+          id="class-select"
+          class="dropdown-selector"
+          style="
+            min-width: 300px;
+            padding: 10px;
+            font-size: 14px;
+            border-radius: 5px;
+          "
+        >
+          <option value="">-- Choose a Class --</option>
+        </select>
+      </div>
+    </div>
+
+    <div
+      class="content"
+      style="
+        display: block;
+        max-width: 900px;
+        margin: 0 auto;
+        padding-top: 40px;
+      "
+    >
+      <div id="allocation-workspace">
+        <div class="empty-state">
+          Select a class above to lock in their faculty.
+        </div>
+      </div>
+    </div>
+
+    <script src="../js/allocate.js"></script>
+  </body>
+</html>
